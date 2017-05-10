@@ -8,15 +8,17 @@ Background on c64 graphic modes here:
 https://www.c64-wiki.com/wiki/Graphics_Modes
 
 I'm basically emulating the Multicolor Bitmap Mode.
-So for that mode you can have 4 out of 16 colors in each 8x8 block in an image.
+So for that mode you can have 4 out of 16 colors in each 4x8 block in an image.
+
+(made a change 5/10/2017 it should actually be 4x8 because of the resolution its in an aspect radio of 2:1)
+http://dustlayer.com/vic-ii/2013/4/26/vic-ii-for-beginners-screen-modes-cheaper-by-the-dozen
 
 So what I did was make a function that takes a PImage
-
 1.  Resize the source to 160x200
-2.  Loop through the image and look at each 8x8 set of pixels.
-3.  I take the 8x8 pixels and use the filter POSTERIZE to drop it down to 4 colors.
-4.  I run a loop over the 8x8 and find the closest colors that are in the c64 palette and pick those colors.
-5.  Write each 8x8 back out to another PImage and return the full image when done.
+2.  Loop through the image and look at each 4x8 set of pixels.
+3.  I take the 4x8 pixels and use the filter POSTERIZE to drop it down to 4 colors.
+4.  I run a loop over the 4x8 and find the closest colors that are in the c64 palette and pick those colors.
+5.  Write each 4x8 back out to another PImage and return the full image when done.
 
 Fun things to do with this.
 Run live video through it.
@@ -30,6 +32,9 @@ This is free code use it for whatever you would like.
 
 Here is an example of running a video file through it.  You can also do it with a webcam or video input.
 https://vimeo.com/216556606
+
+Change Log
+2017/5/10 -- should actually get 4x8 blocks instead of 8x8 because of the aspect radio of 2:1
 
 */
 
@@ -115,11 +120,11 @@ PImage PImageToC64(PImage source)
     source.resize(160,200);
   }
   
-  for(int i=0; i<160; i=i+8)
+  for(int i=0; i<160; i=i+4)
   {
     for(int j=0; j<200; j=j+8)
     {
-      eightbyeight = source.get(i,j,8,8);
+      eightbyeight = source.get(i,j,4,8);
       eightbyeight = convertByte(eightbyeight);
       image(eightbyeight,i,j);
     }
@@ -137,7 +142,7 @@ PImage convertByte(PImage block)
   color c64color;
   color sourcecolor;
   
-  for(int x=0; x<8; x++)
+  for(int x=0; x<4; x++)
   {
     for(int y=0; y<8; y++)
     {
