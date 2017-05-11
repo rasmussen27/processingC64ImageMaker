@@ -9,12 +9,12 @@ Background on c64 graphic modes here:
 https://www.c64-wiki.com/wiki/Graphics_Modes
 
 I'm basically emulating the Multicolor Bitmap Mode.
-So for that mode you can have 4 out of 16 colors in each 8x8 block in an image.
+So for that mode you can have 4 out of 16 colors in each (8x8) --- actually 4x8 block in an image.
 
 So what I did was make a function that takes a PImage
 
 1.  Resize the source to 160x200
-2.  Loop through the image and look at each 8x8 set of pixels.
+2.  Loop through the image and look at each (8x8) -- actually 4x8 set of pixels.
 3.  I take the 8x8 pixels and use the filter POSTERIZE to drop it down to 4 colors.
 4.  I run a loop over the 8x8 and find the closest colors that are in the c64 palette and pick those colors.
 5.  Write each 8x8 back out to another PImage and return the full image when done.
