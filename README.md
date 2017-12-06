@@ -28,7 +28,3 @@ Take the time to write out the output to a real c64 format. (if you do this let 
 If you use this please drop me a line and let me know what you're doing with it.
 Email: john.rasmussen33@gmail.com subject: "GITHUB C64 CONVERTER"
 This is free code use it for whatever you would like.
-
-Here is an example of running a video file through it.  You can also do it with a webcam or video input.
-
-https://vimeo.com/216556606
